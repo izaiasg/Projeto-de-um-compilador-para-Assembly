@@ -1,0 +1,58 @@
+%option noyywrap nodefault
+
+%{
+
+enum saida{
+
+	POP = 1,
+	PUSH = 2,
+	INC = 3,
+	DEC = 4,
+	CALL = 5,
+	REG = 6,
+	ABRE_COLCHETES = 7,
+	FECHA_COLCHETES = 8,
+	RETURN = 9,
+	LOAD = 10,
+	PRINT = 11,
+	JZ = 12,
+	JNZ = 13,
+	JUMP = 14,
+	ADD = 15,
+	SUB = 16,
+	MUL = 17,
+	DIV = 18,
+	JE = 19,
+	JNE = 20,
+	INVALID = 101,
+	
+};
+
+%}
+
+%%
+
+"//".*			{}
+"POP"			{return POP;}
+"PUSH"			{return PUSH;}
+"INC"			{return INC;}
+"DEC"			{return DEC;}
+"CALL"			{return CALL;}
+[R][1-8]		{return REG;}
+"["				{return ABRE_COLCHETES;}
+"]"				{return FECHA_COLCHETES;}
+"RET"			{return RETURN;}
+"LD"			{return LOAD;}
+"PRINT"			{return PRINT;}
+"JZ"			{return JZ;}
+"JNZ"			{return JNZ;}
+"JMP"			{return JUMP;}
+"ADD"			{return ADD;}
+"SUB"			{return SUB;}
+"MUL"			{return MUL;}
+"DIV"			{return DIV;}
+"JE"			{return JE;}
+"JNE"			{return JNE;}
+.				{return INVALID;}
+
+%%
