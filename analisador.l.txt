@@ -22,8 +22,16 @@ enum saida{
 	SUB = 16,
 	MUL = 17,
 	DIV = 18,
-	JE = 19,
-	JNE = 20,
+	LABEL = 19,
+	NUMBER = 20,
+	ENDRECO = 21,	
+	JE = 22,
+	JNE = 23,
+	NOT = 24,
+	OR = 25,
+	XOR = 26,
+	AND = 27,
+	
 	INVALID = 101,
 	
 };
@@ -39,8 +47,8 @@ enum saida{
 "DEC"			{return DEC;}
 "CALL"			{return CALL;}
 [R][1-8]		{return REG;}
-"["				{return ABRE_COLCHETES;}
-"]"				{return FECHA_COLCHETES;}
+"["			{return ABRE_COLCHETES;}
+"]"			{return FECHA_COLCHETES;}
 "RET"			{return RETURN;}
 "LD"			{return LOAD;}
 "PRINT"			{return PRINT;}
@@ -51,8 +59,16 @@ enum saida{
 "SUB"			{return SUB;}
 "MUL"			{return MUL;}
 "DIV"			{return DIV;}
+[A-Z][a-z]*		{return LABEL;}
+[+-]?[0-9]+		{return NUMBER;}
+"0x"[0-9]		{return ENDRECO;}
 "JE"			{return JE;}
 "JNE"			{return JNE;}
-.				{return INVALID;}
+"NOT"			{return NOT;}
+"OR"			{return OR;}
+"XOR"			{return XOR;}
+"AND"			{return AND;}
+
+.			{return INVALID;}
 
 %%
