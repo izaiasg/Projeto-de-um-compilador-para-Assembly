@@ -1,6 +1,6 @@
-%option noyywrap nodefault
-
 %{
+
+int lineNumber = 0;
 
 enum saida{
 
@@ -32,15 +32,16 @@ enum saida{
 	XOR = 26,
 	AND = 27,
 	
-	INVALID = 101,
 	
 };
 
 %}
 
+%option noyywrap nodefault
+%x COMENTARIO
+
 %%
 
-"//".*			{}
 "POP"			{return POP;}
 "PUSH"			{return PUSH;}
 "INC"			{return INC;}
@@ -68,7 +69,17 @@ enum saida{
 "OR"			{return OR;}
 "XOR"			{return XOR;}
 "AND"			{return AND;}
+"\n" 			{lineNumber++;}
 
-.			{return INVALID;}
+
+"/*" {BEGIN(COMENTARIO);}
+
+<COMENTARIO>"*/" {BEGIN(INITIAL);}
+
+<COMENTARIO>\n { lineNumber++;}
+
+<COMENTARIO>. {}
+
+.			{}
 
 %%
