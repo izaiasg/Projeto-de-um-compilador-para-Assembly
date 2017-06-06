@@ -72,13 +72,11 @@ enum saida{
 "\n" 			{lineNumber++;}
 
 
-"/*" {BEGIN(COMENTARIO);}
+"/*" 			{BEGIN(COMENTARIO);}
 
-<COMENTARIO>"*/" {BEGIN(INITIAL);}
-
-<COMENTARIO>\n { lineNumber++;}
-
-<COMENTARIO>. {}
+<COMENTARIO>"*/" 	{BEGIN(INITIAL);}
+<COMENTARIO>\n 		{lineNumber++;}
+<COMENTARIO>. 		{}
 
 .			{}
 
